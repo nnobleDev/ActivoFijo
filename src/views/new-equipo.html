@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>Activo Fijo</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <form action="" class="p-4">
+                <div class="form-group">
+                    <label for="">N° de equipo</label><br>
+                    <input type="text" id="nEquipo" >
+                </div>
+                <div class="form-group">
+                    <label for="">Descripcion</label><br>
+                    <input type="text" id="desc">
+                </div>
+                <div class="form-group">
+                    <label for="">Origen</label><br>
+                    <input type="text" id="orig" >
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre de quien entrega</label><br>
+                    <input type="text" id="nqe" >
+                </div>
+                <div class="form-group">
+                    <label for="">Padron o cedula de quien entrega</label><br>
+                    <input type="text" id="pde" >
+                </div>
+                <div class="form-group">
+                    <label for="">Destino</label><br>
+                    <input type="text" id="dest" >
+                </div>
+                <div class="form-group">
+                    <label for="">Nombre de quien recibe</label><br>
+                    <input type="text" id="nqr" >
+                </div>
+                <div class="form-group">
+                    <label for="">Padron o cedula de quien recibe</label><br>
+                    <input type="text" id="pdr" >
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" >Registrar</button>
+                </div>
+            </form>
+            <script>
+                const {ipcRenderer}= require('electron');
+                const form=document.querySelector('form');
+                form.addEventListener('submit',e=>{
+                    
+                    const nEquipo=document.querySelector('#nEquipo').value;
+                    const desc=document.querySelector('#desc').value;
+                    const orig=document.querySelector('#orig').value;
+                    const nqe=document.querySelector('#nqe').value;
+                    const pde=document.querySelector('#pde').value;
+                    const dest=document.querySelector('#dest').value;
+                    const nqr=document.querySelector('#nqr').value;
+                    const pdr=document.querySelector('#pdr').value;
+                    console.log(nEquipo,desc,orig,nqe,pde,dest,nqr,pdr);
+                    const nf={
+                        nEquipo:nEquipo,
+                        desc:desc,
+                        orig:orig,
+                        nqe:nqe,
+                        pde:pde,
+                        dest:dest,
+                        nqr:nqr,
+                        pdr:pdr
+                    };
+                    ipcRenderer.send('registro:af',nf);
+                    e.preventDefault();
+                });
+            </script>
+        </div>
+    </div>
+
+
+
+    
+</body>
+</html>
